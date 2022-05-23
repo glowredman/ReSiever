@@ -1,0 +1,6 @@
+// Add your dependencies here
+
+dependencies {
+    compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
+    compile "com.github.GTNewHorizons:NotEnoughItems:2.2.9-GTNH:dev"
+}

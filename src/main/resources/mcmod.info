@@ -1,0 +1,21 @@
+{
+	"modListVersion": 2,
+	"modList": [{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "Fixes Ex Nihilo's NEI Handlers to work with the GTNH fork of NEI",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "https://github.com/glowredman/ReSiever",
+		"updateUrl": "",
+		"authorList": ["glowredman"],
+		"credits": "",
+		"logoFile": "",
+		"screenshots": [],
+		"parent": "",
+		"requiredMods": ["exnihilo", "spongemixins", "NotEnoughItems@[2.0.2,)"],
+		"dependencies": ["spongemixins"],
+		"dependants": [],
+		"useDependencyInformation": true
+	}]
+}
