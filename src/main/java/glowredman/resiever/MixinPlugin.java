@@ -2,7 +2,7 @@ package glowredman.resiever;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +12,6 @@ import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.launchwrapper.Launch;
 import ru.timeconqueror.spongemixins.MinecraftURLClassPath;
 
@@ -39,12 +38,21 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public List<String> getMixins() {
         boolean dev = (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
-        if((dev && MinecraftURLClassPath.findJarInClassPath("Ex-Nihilo")) || loadJar()) {
-            return Arrays.asList("MixinCachedHammerRecipe", "MixinCachedSieveRecipe", "MixinRecipeHandlerHammer", "MixinRecipeHandlerSieve");
+        List<String> mixins = new ArrayList<>();
+        if((dev && MinecraftURLClassPath.findJarInClassPath("Ex-Nihilo")) || loadJar("Ex-Nihilo")) {
+            mixins.add("MixinCachedHammerRecipe");
+            mixins.add("MixinCachedSieveRecipe");
+            mixins.add("MixinRecipeHandlerHammer");
+            mixins.add("MixinRecipeHandlerSieve");
         }
-        LOGGER.error("CRITICAL ERROR: Could not find required jar Ex-Nihilo");
-        FMLCommonHandler.instance().exitJava(-1, true);
-        return null;
+        if((dev && MinecraftURLClassPath.findJarInClassPath("thermal-expansion")) || loadJar("ThermalExpansion")) {
+            mixins.add("MixinNEIRecipeBase");
+            mixins.add("MixinRecipeHandlerBase");
+            mixins.add("MixinRecipeHandlerInsolator");
+            mixins.add("MixinRecipeHandlerTransposer");
+        }
+        LOGGER.error("Neither Ex-Nihilo nor ThermalExpansion could be found! ReSiever is sad now because it has nothing to do :(");
+        return mixins;
     }
 
     @Override
@@ -53,11 +61,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {}
     
-    private boolean loadJar() {
+    private boolean loadJar(String jarName) {
         try {
-            File jar = MinecraftURLClassPath.getJarInModPath("Ex-Nihilo");
+            File jar = MinecraftURLClassPath.getJarInModPath(jarName);
             if(jar == null) {
-                LOGGER.info("Could not find Ex-Nihilo jar");
+                LOGGER.info("Could not find " + jarName + "!");
                 return false;
             }
             LOGGER.info("Attempting to add " + jar + " to the URL Class Path");
