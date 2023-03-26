@@ -18,7 +18,7 @@ public abstract class MixinRecipeHandlerTransposer extends MixinRecipeHandlerBas
      * @reason Allow ThermalExpansion to work with the GTNH fork of NEI
      */
     @Overwrite(remap = false)
-    public List<String> handleTooltip(GuiRecipe gui, List<String> currenttip, int recipe) {
+    public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe) {
         if (Utils.isMouseInsideRect(148, 164, 3, 63, gui, recipe)) {
             currenttip.add(((INEIRecipeBase) arecipes.get(recipe)).getFluid().getLocalizedName());
         }

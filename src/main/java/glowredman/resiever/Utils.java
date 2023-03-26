@@ -21,7 +21,7 @@ public class Utils {
         return false;
     }
 
-    public static boolean isMouseInsideRect(int minX, int maxX, int minY, int maxY, GuiRecipe gui, int recipe) {
+    public static boolean isMouseInsideRect(int minX, int maxX, int minY, int maxY, GuiRecipe<?> gui, int recipe) {
         Point root = gui.getRecipePosition(recipe);
         return isInsideRect(
                 GuiDraw.getMousePosition(),

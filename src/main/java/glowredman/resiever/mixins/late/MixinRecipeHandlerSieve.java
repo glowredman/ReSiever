@@ -26,7 +26,7 @@ public abstract class MixinRecipeHandlerSieve extends TemplateRecipeHandler {
      * @reason Fix compat with the GTNH NEI fork
      */
     @Overwrite(remap = false)
-    public List<String> handleItemTooltip(GuiRecipe gui, ItemStack stack, List<String> currenttip, int recipe) {
+    public List<String> handleItemTooltip(GuiRecipe<?> gui, ItemStack stack, List<String> currenttip, int recipe) {
         super.handleItemTooltip(gui, stack, currenttip, recipe);
         CachedSieveRecipe crecipe = (CachedSieveRecipe) this.arecipes.get(recipe);
         if (stack != null && Utils.contains(crecipe.getOtherStacks(), stack)) {
