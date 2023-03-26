@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Unique;
 import codechicken.nei.PositionedStack;
 
 public interface IInputAccessor {
-    
+
     @Unique
     List<PositionedStack> resiever$getInput();
 
