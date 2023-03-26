@@ -3,8 +3,8 @@ package glowredman.resiever;
 public enum TargetedMod {
 
     VANILLA("Minecraft", null),
-    THERMAL_EXPANSION("thermal-expansion", null),
-    EX_NIHILO("ex-nihilo", null);
+    THERMAL_EXPANSION("Thermal Expansion", null, "ThermalExpansion"),
+    EX_NIHILO("Ex Nihilo", null, "exnihilo");
 
     /** The "name" in the @Mod annotation */
     public final String modName;
