@@ -1,4 +1,4 @@
-package glowredman.resiever.mixins;
+package glowredman.resiever.mixins.late;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import glowredman.resiever.IInputAccessor;
 
 @Mixin(CachedHammerRecipe.class)
 public class MixinCachedHammerRecipe implements IInputAccessor {
-    
+
     @Shadow(remap = false)
     private List<PositionedStack> input;
 
