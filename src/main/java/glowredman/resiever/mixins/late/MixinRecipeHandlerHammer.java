@@ -32,7 +32,8 @@ public abstract class MixinRecipeHandlerHammer extends TemplateRecipeHandler {
         CachedHammerRecipe crecipe = (CachedHammerRecipe) this.arecipes.get(recipe);
         if (stack != null && Utils.contains(crecipe.getOtherStacks(), stack)) {
             currenttip.add("Drop Chance:");
-            ItemStack sourceStack = ((IInputAccessor) crecipe).resiever$getInput().get(0).item;
+            ItemStack sourceStack = ((IInputAccessor) crecipe).resiever$getInput()
+                                                              .get(0).item;
             Block inBlock = Block.getBlockFromItem(sourceStack.getItem());
             int meta = sourceStack.getItemDamage();
             for (Smashable smash : HammerRegistry.getRewards(inBlock, meta)) {

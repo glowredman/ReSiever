@@ -7,16 +7,21 @@ import java.util.Set;
 
 public enum Mixins {
 
-    THERMAL_EXPANSION_NEI_FIXES(new Builder("Fix Thermal compat w/ GTNH NEI").addMixinClasses(
-            "MixinNEIRecipeBase",
-            "MixinRecipeHandlerBase",
-            "MixinRecipeHandlerInsolator",
-            "MixinRecipeHandlerTransposer").addTargetedMod(TargetedMod.THERMAL_EXPANSION)),
-    EX_NIHILO_NEI_FIXES(new Builder("Ex-Nihilio GTNH NEI Compat").addMixinClasses(
-            "MixinCachedHammerRecipe",
-            "MixinCachedSieveRecipe",
-            "MixinRecipeHandlerHammer",
-            "MixinRecipeHandlerSieve").addTargetedMod(TargetedMod.EX_NIHILO));
+    THERMAL_EXPANSION_NEI_FIXES(
+            new Builder("Fix Thermal compat w/ GTNH NEI")
+                                                         .addMixinClasses(
+                                                                 "MixinNEIRecipeBase",
+                                                                 "MixinRecipeHandlerBase",
+                                                                 "MixinRecipeHandlerInsolator",
+                                                                 "MixinRecipeHandlerTransposer")
+                                                         .addTargetedMod(TargetedMod.THERMAL_EXPANSION)),
+    EX_NIHILO_NEI_FIXES(new Builder("Ex-Nihilio GTNH NEI Compat")
+                                                                 .addMixinClasses(
+                                                                         "MixinCachedHammerRecipe",
+                                                                         "MixinCachedSieveRecipe",
+                                                                         "MixinRecipeHandlerHammer",
+                                                                         "MixinRecipeHandlerSieve")
+                                                                 .addTargetedMod(TargetedMod.EX_NIHILO));
 
     private static class Builder {
 

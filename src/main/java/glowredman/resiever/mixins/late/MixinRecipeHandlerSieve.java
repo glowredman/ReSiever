@@ -31,7 +31,8 @@ public abstract class MixinRecipeHandlerSieve extends TemplateRecipeHandler {
         CachedSieveRecipe crecipe = (CachedSieveRecipe) this.arecipes.get(recipe);
         if (stack != null && Utils.contains(crecipe.getOtherStacks(), stack)) {
             currenttip.add("Drop Chance:");
-            ItemStack sourceStack = ((IInputAccessor) crecipe).resiever$getInput().get(0).item;
+            ItemStack sourceStack = ((IInputAccessor) crecipe).resiever$getInput()
+                                                              .get(0).item;
             Block inBlock = Block.getBlockFromItem(sourceStack.getItem());
             int meta = sourceStack.getItemDamage();
             for (SiftingResult smash : SieveRegistry.getSiftingOutput(inBlock, meta)) {
