@@ -82,18 +82,12 @@ public abstract class MixinRecipeHandlerBase extends TemplateRecipeHandler {
     int scaleFluid;
 
     @Shadow(remap = false)
-    public int getScaledEnergy(int amount) {
-        throw new IllegalStateException("ReSiever failed to shadow getScaledEnergy!");
-    }
+    public abstract int getScaledEnergy(int amount);
 
     @Shadow(remap = false)
-    public int getScaledFluid(int amount) {
-        throw new IllegalStateException("ReSiever failed to shadow getScaledFluid!");
-    }
+    public abstract int getScaledFluid(int amount);
 
     @Shadow(remap = false)
-    protected void drawFluidRect(int j, int k, FluidStack fluid, int width, int height) {
-        throw new IllegalStateException("ReSiever failed to shadow drawFluidRect!");
-    }
+    protected abstract void drawFluidRect(int j, int k, FluidStack fluid, int width, int height);
 
 }
