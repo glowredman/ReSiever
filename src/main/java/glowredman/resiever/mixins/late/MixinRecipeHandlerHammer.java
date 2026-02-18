@@ -33,7 +33,7 @@ public abstract class MixinRecipeHandlerHammer extends TemplateRecipeHandler {
         if (stack != null && Utils.contains(crecipe.getOtherStacks(), stack)) {
             currenttip.add("Drop Chance:");
             ItemStack sourceStack = ((IInputAccessor) crecipe).resiever$getInput()
-                                                              .get(0).item;
+                .get(0).item;
             Block inBlock = Block.getBlockFromItem(sourceStack.getItem());
             int meta = sourceStack.getItemDamage();
             for (Smashable smash : HammerRegistry.getRewards(inBlock, meta)) {
@@ -41,13 +41,13 @@ public abstract class MixinRecipeHandlerHammer extends TemplateRecipeHandler {
                     int chance = (int) (100 * smash.chance);
                     int fortune = (int) (100 * smash.luckMultiplier);
                     if (fortune > 0) currenttip.add(
-                            "  * " + chance
-                                    + "%"
-                                    + EnumChatFormatting.BLUE
-                                    + " (+"
-                                    + fortune
-                                    + "% luck bonus)"
-                                    + EnumChatFormatting.RESET);
+                        "  * " + chance
+                            + "%"
+                            + EnumChatFormatting.BLUE
+                            + " (+"
+                            + fortune
+                            + "% luck bonus)"
+                            + EnumChatFormatting.RESET);
                     else currenttip.add("  * " + chance + "%");
 
                 }
