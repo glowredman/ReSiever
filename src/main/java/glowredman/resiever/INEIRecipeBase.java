@@ -7,5 +7,4 @@ public interface INEIRecipeBase {
     FluidStack getFluid();
 
     int getEnergy();
-
 }

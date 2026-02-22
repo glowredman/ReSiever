@@ -15,7 +15,7 @@ import exnihilo.compatibility.nei.RecipeHandlerSieve;
 import exnihilo.compatibility.nei.RecipeHandlerSieve.CachedSieveRecipe;
 import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
-import glowredman.resiever.IInputAccessor;
+import glowredman.resiever.ICachedSieveRecipe;
 import glowredman.resiever.Utils;
 
 @Mixin(RecipeHandlerSieve.class)
@@ -29,22 +29,24 @@ public abstract class MixinRecipeHandlerSieve extends TemplateRecipeHandler {
     public List<String> handleItemTooltip(GuiRecipe<?> gui, ItemStack stack, List<String> currenttip, int recipe) {
         super.handleItemTooltip(gui, stack, currenttip, recipe);
         CachedSieveRecipe crecipe = (CachedSieveRecipe) this.arecipes.get(recipe);
-        if (stack != null && Utils.contains(crecipe.getOtherStacks(), stack)) {
-            currenttip.add("Drop Chance:");
-            ItemStack sourceStack = ((IInputAccessor) crecipe).resiever$getInput()
-                .get(0).item;
-            Block inBlock = Block.getBlockFromItem(sourceStack.getItem());
-            int meta = sourceStack.getItemDamage();
-            for (SiftingResult smash : SieveRegistry.getSiftingOutput(inBlock, meta)) {
-                if (NEIServerUtils.areStacksSameTypeCrafting(stack, new ItemStack(smash.item, 1, smash.meta))) {
-                    int chance = (int) Math.round(100.0 / smash.rarity);
-                    currenttip.add("  * " + chance + "%");
 
-                }
-
-            }
-
+        if (!Utils.contains(crecipe.getOtherStacks(), stack) || !Utils.isMouseInsideRect(0, 166, 0, 130, gui, recipe)) {
+            return currenttip;
         }
+
+        currenttip.add("Drop Chance:");
+        ItemStack sourceStack = ((ICachedSieveRecipe) crecipe).getInput()
+            .get(0).item;
+        Block inBlock = Block.getBlockFromItem(sourceStack.getItem());
+        int meta = sourceStack.getItemDamage();
+        for (SiftingResult siftingResult : SieveRegistry.getSiftingOutput(inBlock, meta)) {
+            if (NEIServerUtils
+                .areStacksSameTypeCrafting(stack, new ItemStack(siftingResult.item, 1, siftingResult.meta))) {
+                int chance = (int) Math.round(100.0 / siftingResult.rarity);
+                currenttip.add("  * " + chance + "%");
+            }
+        }
+
         return currenttip;
     }
 

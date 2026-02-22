@@ -41,7 +41,7 @@ public abstract class MixinRecipeHandlerBase extends TemplateRecipeHandler {
         int energy = ((INEIRecipeBase) this.arecipes.get(recipe)).getEnergy();
         int numReductions = Math.floorDiv(this.maxEnergy, energy);
         int reductionCount = Math.floorDiv(this.cycleticks, 20); // 1 sec between each reduction
-        int scaledEnergy = getScaledEnergy(energy * (reductionCount % numReductions));
+        int scaledEnergy = this.getScaledEnergy(energy * (reductionCount % numReductions));
         GuiDraw.drawTexturedModalRect(4, 2 + scaledEnergy, 16, 96 + scaledEnergy, 16, this.scaleEnergy - scaledEnergy);
     }
 
@@ -58,11 +58,11 @@ public abstract class MixinRecipeHandlerBase extends TemplateRecipeHandler {
         }
         int numReductions = Math.floorDiv(this.maxFluid, fluid.amount);
         int reductionCount = Math.floorDiv(this.cycleticks, 20); // 1 sec between each reduction
-        int scaledFluidAmount = getScaledFluid(fluid.amount * (reductionCount % numReductions));
+        int scaledFluidAmount = this.getScaledFluid(fluid.amount * (reductionCount % numReductions));
         if (increase) {
-            drawFluidRect(148, 3 + this.scaleFluid - scaledFluidAmount, fluid, 16, scaledFluidAmount);
+            this.drawFluidRect(148, 3 + this.scaleFluid - scaledFluidAmount, fluid, 16, scaledFluidAmount);
         } else {
-            drawFluidRect(148, 3 + scaledFluidAmount, fluid, 16, this.scaleFluid - scaledFluidAmount);
+            this.drawFluidRect(148, 3 + scaledFluidAmount, fluid, 16, this.scaleFluid - scaledFluidAmount);
         }
         GuiDraw.drawTexturedModalRect(148, 2, 80, 96, 18, this.scaleFluid + 2);
     }

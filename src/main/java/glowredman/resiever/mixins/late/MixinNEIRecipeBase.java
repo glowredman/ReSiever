@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import glowredman.resiever.INEIRecipeBase;
 
 @Mixin(targets = "cofh.thermalexpansion.plugins.nei.handlers.RecipeHandlerBase$NEIRecipeBase")
-abstract class MixinNEIRecipeBase implements INEIRecipeBase {
+public class MixinNEIRecipeBase implements INEIRecipeBase {
 
     @Shadow(remap = false)
     FluidStack fluid;
@@ -25,5 +25,4 @@ abstract class MixinNEIRecipeBase implements INEIRecipeBase {
     public int getEnergy() {
         return this.energy;
     }
-
 }

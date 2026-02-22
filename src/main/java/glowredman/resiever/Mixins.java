@@ -1,79 +1,31 @@
 package glowredman.resiever;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import com.gtnewhorizon.gtnhmixins.builders.IMixins;
+import com.gtnewhorizon.gtnhmixins.builders.MixinBuilder;
 
-public enum Mixins {
+public enum Mixins implements IMixins {
 
-    THERMAL_EXPANSION_NEI_FIXES(new Builder("Fix Thermal compat w/ GTNH NEI")
-        .addMixinClasses(
+    THERMAL_EXPANSION_NEI_FIXES(new MixinBuilder()
+        .addCommonMixins(
             "MixinNEIRecipeBase",
             "MixinRecipeHandlerBase",
+            "MixinRecipeHandlerCrucible",
             "MixinRecipeHandlerInsolator",
             "MixinRecipeHandlerTransposer")
-        .addTargetedMod(TargetedMod.THERMAL_EXPANSION)),
-    EX_NIHILO_NEI_FIXES(new Builder("Ex-Nihilio GTNH NEI Compat")
-        .addMixinClasses(
-            "MixinCachedHammerRecipe",
-            "MixinCachedSieveRecipe",
-            "MixinRecipeHandlerHammer",
-            "MixinRecipeHandlerSieve")
-        .addTargetedMod(TargetedMod.EX_NIHILO));
+        .addRequiredMod(TargetedMod.THERMAL_EXPANSION)
+        .setPhase(Phase.LATE)),
+    EX_NIHILO_NEI_FIXES(new MixinBuilder().addCommonMixins("MixinCachedSieveRecipe", "MixinRecipeHandlerSieve")
+        .addRequiredMod(TargetedMod.EX_NIHILO)
+        .setPhase(Phase.LATE));
 
-    private static class Builder {
+    private final MixinBuilder builder;
 
-        private final String name;
-        private final List<String> mixinClasses = new ArrayList<>();
-
-        private final List<TargetedMod> targetedMods = new ArrayList<>();
-
-        public Builder(String name) {
-            this.name = name;
-        }
-
-        public Builder addMixinClasses(String... mixinClasses) {
-            this.mixinClasses.addAll(Arrays.asList(mixinClasses));
-            return this;
-        }
-
-        public Builder addTargetedMod(TargetedMod mod) {
-            this.targetedMods.add(mod);
-            return this;
-        }
+    private Mixins(MixinBuilder builder) {
+        this.builder = builder;
     }
 
-    public final String name;
-    public final List<String> mixinClasses;
-    public final List<TargetedMod> targetedMods;
-
-    Mixins(Builder builder) {
-        this.name = builder.name;
-        this.mixinClasses = builder.mixinClasses;
-        this.targetedMods = builder.targetedMods;
-        if (this.targetedMods.isEmpty()) {
-            throw new RuntimeException("No targeted mods specified for " + this.name);
-        }
+    @Override
+    public MixinBuilder getBuilder() {
+        return this.builder;
     }
-
-    private boolean allModsLoaded(List<TargetedMod> targetedMods, Set<String> loadedCoreMods, Set<String> loadedMods) {
-        if (targetedMods.isEmpty()) return false;
-
-        for (TargetedMod target : targetedMods) {
-            if (target == TargetedMod.VANILLA) continue;
-
-            // Check coremod first
-            if (!loadedCoreMods.isEmpty() && target.coreModClass != null
-                && !loadedCoreMods.contains(target.coreModClass)) return false;
-            else if (!loadedMods.isEmpty() && target.modId != null && !loadedMods.contains(target.modId)) return false;
-        }
-
-        return true;
-    }
-
-    public boolean shouldLoad(Set<String> loadedCoreMods, Set<String> loadedMods) {
-        return (allModsLoaded(targetedMods, loadedCoreMods, loadedMods));
-    }
-
 }

@@ -13,9 +13,9 @@
 		"logoFile": "",
 		"screenshots": [],
 		"parent": "",
-		"requiredMods": ["spongemixins"],
-		"dependencies": ["spongemixins"],
+		"requiredMods": [],
+		"dependencies": [],
 		"dependants": [],
-		"useDependencyInformation": true
+		"useDependencyInformation": false
 	}]
 }

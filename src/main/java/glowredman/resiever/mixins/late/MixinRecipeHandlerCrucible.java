@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 import codechicken.nei.recipe.GuiRecipe;
 import cofh.thermalexpansion.plugins.nei.handlers.RecipeHandlerBase;
-import cofh.thermalexpansion.plugins.nei.handlers.RecipeHandlerTransposer;
+import cofh.thermalexpansion.plugins.nei.handlers.RecipeHandlerCrucible;
 import glowredman.resiever.INEIRecipeBase;
 import glowredman.resiever.Utils;
 
-@Mixin(RecipeHandlerTransposer.class)
-public abstract class MixinRecipeHandlerTransposer extends RecipeHandlerBase {
+@Mixin(RecipeHandlerCrucible.class)
+public abstract class MixinRecipeHandlerCrucible extends RecipeHandlerBase {
 
     /**
      * @author glowredman

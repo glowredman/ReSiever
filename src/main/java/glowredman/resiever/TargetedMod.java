@@ -1,30 +1,38 @@
 package glowredman.resiever;
 
-public enum TargetedMod {
+import javax.annotation.Nonnull;
 
-    VANILLA("Minecraft", null),
-    THERMAL_EXPANSION("Thermal Expansion", null, "ThermalExpansion"),
-    EX_NIHILO("Ex Nihilo", null, "exnihilo");
+import com.gtnewhorizon.gtnhmixins.builders.ITargetMod;
+import com.gtnewhorizon.gtnhmixins.builders.TargetModBuilder;
 
-    /** The "name" in the @Mod annotation */
-    public final String modName;
-    /** Class that implements the IFMLLoadingPlugin interface */
-    public final String coreModClass;
-    /** The "modid" in the @Mod annotation */
-    public final String modId;
+public enum TargetedMod implements ITargetMod {
 
-    TargetedMod(String modName, String coreModClass) {
-        this(modName, coreModClass, null);
+    THERMAL_EXPANSION("ThermalExpansion"),
+    EX_NIHILO("exnihilo");
+
+    private final TargetModBuilder builder;
+
+    TargetedMod(TargetModBuilder builder) {
+        this.builder = builder;
     }
 
-    TargetedMod(String modName, String coreModClass, String modId) {
-        this.modName = modName;
-        this.coreModClass = coreModClass;
-        this.modId = modId;
+    TargetedMod(String modId) {
+        this(null, modId, null);
+    }
+
+    TargetedMod(String coreModClass, String modId) {
+        this(coreModClass, modId, null);
+    }
+
+    TargetedMod(String coreModClass, String modId, String targetClass) {
+        this.builder = new TargetModBuilder().setCoreModClass(coreModClass)
+            .setModId(modId)
+            .setTargetClass(targetClass);
     }
 
     @Override
-    public String toString() {
-        return "TargetedMod{modName='" + modName + "', coreModClass='" + coreModClass + "', modId='" + modId + "'}";
+    @Nonnull
+    public TargetModBuilder getBuilder() {
+        return this.builder;
     }
 }

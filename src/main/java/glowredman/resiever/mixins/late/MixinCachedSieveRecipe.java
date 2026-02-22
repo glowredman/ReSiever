@@ -7,17 +7,16 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import codechicken.nei.PositionedStack;
 import exnihilo.compatibility.nei.RecipeHandlerSieve.CachedSieveRecipe;
-import glowredman.resiever.IInputAccessor;
+import glowredman.resiever.ICachedSieveRecipe;
 
 @Mixin(CachedSieveRecipe.class)
-public class MixinCachedSieveRecipe implements IInputAccessor {
+public class MixinCachedSieveRecipe implements ICachedSieveRecipe {
 
     @Shadow(remap = false)
     private List<PositionedStack> input;
 
     @Override
-    public List<PositionedStack> resiever$getInput() {
-        return input;
+    public List<PositionedStack> getInput() {
+        return this.input;
     }
-
 }
