@@ -21,8 +21,8 @@ public abstract class MixinRecipeHandlerTransposer extends MixinRecipeHandlerBas
     public List<String> handleTooltip(GuiRecipe<?> gui, List<String> currenttip, int recipe) {
         if (Utils.isMouseInsideRect(148, 164, 3, 63, gui, recipe)) {
             currenttip.add(
-                    ((INEIRecipeBase) arecipes.get(recipe)).getFluid()
-                                                           .getLocalizedName());
+                ((INEIRecipeBase) arecipes.get(recipe)).getFluid()
+                    .getLocalizedName());
         }
         return super.handleTooltip(gui, currenttip, recipe);
     }

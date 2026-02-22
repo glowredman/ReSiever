@@ -26,9 +26,9 @@ public abstract class MixinRecipeHandlerBase extends TemplateRecipeHandler {
     protected boolean transferFluidTank(GuiRecipe<?> gui, int recipe, boolean usage) {
         FluidStack fluid = ((INEIRecipeBase) this.arecipes.get(recipe)).getFluid();
         return Utils.isMouseInsideRect(148, 164, 3, 63, gui, recipe) && fluid != null
-                && fluid.amount > 0
-                && (usage ? GuiUsageRecipe.openRecipeGui("liquid", fluid)
-                        : GuiCraftingRecipe.openRecipeGui("liquid", fluid));
+            && fluid.amount > 0
+            && (usage ? GuiUsageRecipe.openRecipeGui("liquid", fluid)
+                : GuiCraftingRecipe.openRecipeGui("liquid", fluid));
     }
 
     /**
