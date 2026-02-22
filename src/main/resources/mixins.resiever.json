@@ -5,7 +5,6 @@
   "refmap": "mixins.resiever.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
-  "forceLoadAsMod": true,
   "mixins": [],
   "client": [],
   "server": []
