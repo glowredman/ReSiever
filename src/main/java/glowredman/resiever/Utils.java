@@ -24,11 +24,11 @@ public class Utils {
     public static boolean isMouseInsideRect(int minX, int maxX, int minY, int maxY, GuiRecipe<?> gui, int recipe) {
         Point root = gui.getRecipePosition(recipe);
         return isInsideRect(
-                GuiDraw.getMousePosition(),
-                minX + gui.guiLeft + root.x,
-                maxX + gui.guiLeft + root.x,
-                minY + gui.guiTop + root.y,
-                maxY + gui.guiTop + root.y);
+            GuiDraw.getMousePosition(),
+            minX + gui.guiLeft + root.x,
+            maxX + gui.guiLeft + root.x,
+            minY + gui.guiTop + root.y,
+            maxY + gui.guiTop + root.y);
     }
 
     public static boolean isInsideRect(Point p, int minX, int maxX, int minY, int maxY) {

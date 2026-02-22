@@ -1,6 +1,6 @@
 repositories {
     maven {
-        name "tterrag maven"
-        url "https://maven.tterrag.com/"
+        name "ExNihilo"
+        url "https://modmaven.dev/"
     }
 }
